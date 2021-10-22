@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="Styles.css" rel="stylesheet" />
+        <script type="text/javascript">
+           
+       
+
+
+            
+       /*function tab2()   {
+              debugger;
+var s3=document.getElementsByTagName("li")[2];
+var inner_Text2_Sales=document.getElementsByTagName("a")[2];
+
+
+          }*/
+            
+            
+
+
+
+
+
+
+function ShoppingList(chk){
+    debugger;
+var Table=document.getElementById("divItemList");
+var countInputCheck=Table.getElementsByTagName("input");
+if(chk.checked==true){
+for(var i=0;i<countInputCheck.length;i++){
+    countInputCheck[i].checked=true;
+}
+  }
+  else{
+    for(var i=0;i<countInputCheck.length;i++){
+    countInputCheck[i].checked=false;
+}
+  }
+
+
+}
+
+function deleteall(){
+debugger;
+var DivShopping=document.getElementById("DivShoppingList");
+var main_chk=DivShopping.getElementsByTagName("input")[0];
+
+if(main_chk.checked==true){
+
+    document.getElementById("DivShoppingList").style.display="none";
+
+}
+
+else{
+var Table=document.getElementById("divItemList");
+var countInputCheck=Table.getElementsByTagName("input");
+
+for(var i=0;i<countInputCheck.length;i++){
+        if(countInputCheck[i].checked==true){
+            var parent_chk=countInputCheck[i].parentNode.parentNode;   
+            parent_chk.remove();
+    }
+
+}
+
+}
+
+
+}
+             
+function  showShopping(){
+    debugger;
+document.getElementById("DivShoppingList").style.display="none";
+
+var x=localStorage.getItem("Info");
+document.getElementById("username").innerText="Hello"+" "+x;
+
+
+}
+
+function Discount(){
+debugger;
+    var chk=document.getElementById("chkDiscount");
+    if (chk.checked==true){
+        var discountPart=document.getElementById("DiscountPart").style.display="block";
+    }
+    else{
+        document.getElementById("DiscountPart").style.display="none";
+
+    }
+}
+ 
+function Buy(){
+    debugger;
+ var text=document.getElementById("txtDiscount").value;
+ 
+ var z=text.substr(0,2);
+ var z1=text.substr(2,2);
+
+
+ if(z=="El"){
+    var Table=document.getElementById("tableItems");
+    var tr=document.getElementsByClassName("Electronic");
+var td_value=tr[0].lastChild.innerText;
+var price=td_value.split(" ");
+var pricevalue=parseInt(price[0]);
+var call=pricevalue - (pricevalue*(parseInt(z1)/100));
+tr[0].lastChild.innerText=call+price[1];
+}
+
+else(z=="Pr")
+{
+
+    var Tab=document.getElementById("tableItems");
+    var tr1=document.getElementsByClassName("Perfume");
+    var td_vvalue=tr1[0].lastChild.innerText;
+    var pricee=td_vvalue.split(" ");
+    var pricevvalue=parseInt(pricee[0]);
+var cal=pricevvalue - (pricevvalue*(parseInt(z1)/100));
+tr1[0].lastChild.innerText=cal+pricee[1];
+}
+
+}
+
+function items(x){
+    debugger;
+    document.getElementById("DivShoppingList").style.display="block";
+    var ele=x.parentNode.parentNode.parentNode.parentNode;
+    var img1=ele.getElementsByClassName("mainimgItem")[0].src;
+var Name=ele.getElementsByClassName("headerItem")[0].innerText;
+   var price=ele.getElementsByClassName("headerpriceItem")[0].innerText;
+var discount_Text=ele.getElementsByClassName("discount")[0].innerText;
+var price11=document.createTextNode(price);
+var Name1=document.createTextNode(Name);
+   var chk1=document.createElement("input");
+   chk1.setAttribute("type","checkbox");
+   var td1=document.createElement("td");
+td1.appendChild(chk1);
+
+
+var imgitem=document.createElement("img");
+imgitem.setAttribute("src",img1);
+imgitem.style.width="40px";
+var td2=document.createElement("td");
+
+td2.appendChild(imgitem);
+
+var td3=document.createElement("td");
+
+td3.appendChild(Name1);
+var td4=document.createElement("td");
+
+td4.appendChild(price11);
+var tr1=document.createElement("tr");
+tr1.setAttribute( "class",discount_Text);
+tr1.appendChild(td1);
+tr1.appendChild(td2);
+tr1.appendChild(td3);
+tr1.appendChild(td4);
+var Table=document.getElementById("tableItems");
+Table.appendChild(tr1);
+
+}
+
+            
+        </script>
+    </head>
+    <body  onload="showShopping()">
+        
+        <div class="header">
+    
+            <div class="logo float-left">
+                <img src="Images/Header/SmallLogo.png" />
+            </div>
+            <div style="float: left; margin-left: 1120px; margin-top: 25px; font-weight: bold;">
+                <span id="username">Hello</span>
+                <img src="Images/Icons/logout.png" style="margin-left:5px;cursor:pointer" />
+            </div>
+            <div class="account float-right">
+                <div class="accountSettings">
+                    <div class="ImageCircle">
+                        <img src="Images/Header/ProfilePict.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+        <div id="DivShoppingList" class="showBox" style=" position: absolute; height: 130%; border-right: 2px solid white; background: #333333; width: 270px;">
+            <div style="width: 206px;text-align: center;padding-top: 15px;float: left;">
+                <span style="font-size: 20px; font-weight: bold; font-family: sans-serif; color: white; ">
+                    <input type="checkbox"  onclick="ShoppingList(this)"> Shopping List
+                </span>
+            </div>
+            <div style="float: left;margin-top: 10px;">
+                <img src="Images/Icons/delete.png" width="30" id="imgDelete" onclick="deleteall()" >
+            </div>
+            <div id="divItemList" style="height: 500px; padding-left: 15px; padding-right: 15px; color: white; margin-top: 10px; padding-left: 15px;">
+                <table id="tableItems" style="padding-left:10px;">
+                
+            </table>
+            </div>
+            <div style="padding-left: 15px;">
+                <div style=" margin-left: 3px; color: white; margin-bottom: 10px;">
+                    <input type="checkbox" id="chkDiscount" onclick="Discount()" /> You Have Discount?
+                </div>
+                <div id="DiscountPart" style="display:none;">
+                    <div>
+                        <input type="text" id="txtDiscount" placeholder="Discount Code" style="width: 205px;padding-left: 10px;" />
+                    </div>
+                    <div style="margin-top:10px;color:white;">
+                        <input type="button" class="mybutton" value="Buy" style="width:85%"  onclick="Buy()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+        <div id="HeaderBoxes">
+            <div class="HeaderBoxImage">
+                <img src="Images/Header/Box1.png" />
+            </div>
+            <div class="HeaderBox">
+                <div style="position: absolute; margin-left: 240px;">
+                    <img src="Images/Header/Box2.png" />
+                </div>
+                <div id="HeaderTitle" style="float:left">
+                    <span class="title" style="color: #D30294;">
+                        Dare
+                    </span>
+                    <span class="title">
+                        Academy
+                    </span>
+                </div>
+                <div id="CallUs">
+                    <span style="font-weight:bold" class="contact">
+                        CALL US
+                    </span>
+                    <span style="color: #D30294; margin-left: 7px; font-weight: bold;" class="contact">
+                        06 516 2571
+                    </span>
+                </div>
+            </div>
+        </div>
+    
+       
+        
+        <div class="HeaderMenu" >
+            <ul >
+                <li class="liClick"  >
+                    <a href="#" style="color:white"  >Home</a>
+                </li>
+               <li  onclick="tab2()" ><a href="#">Top Sales</a></li>
+                <li  ><a href="#">Week Offers</a></li>
+                <li >
+                    <a href="#" >Shop By Category</a>
+                    <ul style="display:none;">
+                        <li><a href="#">Fashion</a></li>
+                        <li><a href="#">Cars</a></li>
+                        <li><a href="#">Electronics</a></li>
+                    </ul>
+                </li >
+                <li  >
+                    <a href="#" >Contact Us</a>
+                </li>
+                <li  >
+                    <a href="#" >New Items</a>
+                </li>
+            </ul>
+        </div>
+    
+      
+        
+        
+        
+        
+        
+        
+        <div class="SellingArea">
+            
+            <div class="Item" id="ItemNumber">
+                <span class="Electronic"></span>
+                <img src="Images/Items/Camera_Elec.png" width="130" class="mainimgItem" />
+                <div class="ItemSpec">
+                    <span class="headerItem">Camera Nikon</span>
+                    <span class="itemDetails">
+                        Nikon D850 DSLR Camera with AF-S NIKKOR 24-120mm...
+                    </span>
+                    <span class="discount" style="display: none;">Electronic</span>
+
+                    <div class="PriceSection">
+                        <div style=" padding-top: 5px; float: left;">
+                            <span class="headerpriceItem">300 JD</span>
+                        </div>
+                        <div style="float:left;margin-left:10px">
+                            <img src="Images/Icons/AddtoCart.png" width="30" class="imgAdd" onclick="items(this)" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="Images/Menu/hiddenShadow.png" width="260" />
+                </div>
+            </div>
+    
+            
+    
+            <div class="Item">
+
+                <span class="Perfume"></span>
+                <img src="Images/Items/Perfume_Fashion.png" width="90" class="mainimgItem" style="margin-left:55px;" />
+                <div class="ItemSpec">
+                    <div style="position:absolute">
+                        <img src="Images/Menu/hiddenBox.png" width="270" />
+                    </div>
+                    <span class="discount" style="display: none;">Perfume</span>
+
+                    <span class="headerItem">Perfume Fashion</span>
+                    <span class="itemDetails">Luxury Perfume Fashion for women...</span>
+                    <div class="PriceSection">
+                        <div style=" padding-top: 5px; float: left;">
+                            <span class="headerpriceItem">90 JD</span>
+                        </div>
+                        <div style="float:left;margin-left:10px">
+
+                            <img src="Images/Icons/AddtoCart.png" width="30" class="imgAdd" onclick="items(this)"/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="Images/Menu/hiddenShadow.png" width="260" />
+                </div>
+            </div>
+    
+    
+            <div class="Item">
+
+                <span class="Electronic"></span>
+                <img src="Images/Items/TV.png" width="140" class="mainimgItem" />
+                <div class="ItemSpec">
+                    <div style="position:absolute">
+                        <img src="Images/Menu/hiddenBox.png" width="217" />
+                    </div>
+                    <span class="discount" style="display: none;">Electronic</span>
+
+                    <span class="headerItem">Samsung TV</span>
+                    <div class="itemDetails">
+                        <span>
+                            Samsung TV LED Curved
+                        </span>
+                    </div>
+                    <div class="PriceSection">
+                        <div style=" padding-top: 5px; float: left;">
+                            <span class="headerpriceItem">500 JD</span>
+                        </div>
+                        <div style="float:left;margin-left:10px">
+                            <img src="Images/Icons/AddtoCart.png" width="30" class="imgAdd" onclick="items(this)" />
+                        </div>
+                    </div>
+    
+                </div>
+                <div>
+                    <img src="Images/Menu/hiddenShadow.png" width="260" />
+                </div>
+            </div>
+    
+    
+            <div class="Item">
+
+                <span class="Perfume"></span>
+                <img src="Images/Items/Adidas_Perfume.png" width="180" height="120" class="mainimgItem"/>
+                <div class="ItemSpec">
+                    <div style="position:absolute">
+                        <img src="Images/Menu/hiddenBox.png" width="217" />
+                    </div>
+                    <span class="discount" style="display: none;">Perfume</span>
+
+                    <span class="headerItem">Adidas Perfume</span>
+                    <div class="itemDetails">
+                        <span>
+                            Adidas Perfume
+                        </span>
+                    </div>
+                    <div class="PriceSection">
+                        <div style=" padding-top: 5px; float: left;">
+                            <span class="headerpriceItem">70 JD</span>
+                        </div>
+                        <div style="float:left;margin-left:10px">
+                            
+                            <img src="Images/Icons/AddtoCart.png" width="30" class="imgAdd" onclick="items(this)" />
+                        </div>
+                    </div>
+    
+                </div>
+                <div>
+                    <img src="Images/Menu/hiddenShadow.png" width="260" />
+                </div>
+            </div>
+    
+    
+            <div class="Item">
+
+                <span class="Electronic"></span>
+                <img src="Images/Items/PS4_Elec.png" width="210" class="mainimgItem" />
+                <div class="ItemSpec">
+                    <div style="position:absolute">
+                        <img src="Images/Menu/hiddenBox.png" width="217" />
+                    </div>
+                    <span class="headerItem">PS4</span>
+                    <div class="itemDetails">
+                        <span>
+                            PlayStation PS4 1TB
+                        </span>
+                    </div>
+                    <span class="discount" style="display: none;">Electronic</span>
+
+                    <div class="PriceSection">
+                        <div style=" padding-top: 5px; float: left;">
+                            <span class="headerpriceItem">120 JD</span>
+                        </div>
+                        <div style="float:left;margin-left:10px">
+                            <img src="Images/Icons/AddtoCart.png" width="30" class="imgAdd" onclick="items(this)"/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="Images/Menu/hiddenShadow.png" width="260" />
+                </div>
+            </div>
+        </div>
+    
+    </body>
+</html>

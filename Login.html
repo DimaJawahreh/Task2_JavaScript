@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Login</title>
+        
+        <link href="loginstyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function login(){
+    debugger;
+    var userName=document.getElementById("txtUsername").value;
+    var pass=document.getElementById("txtPassword").value;
+
+    if(userName=="" || pass==""){
+        var show_Msg=document.getElementById("showmsg").style.display="block";
+
+        show_Msg.getElementsByTagName("lable")[0].innertext.style.color="red";
+
+        
+
+    }
+    else{
+        localStorage.setItem("Info",userName);
+    }
+}
+
+</script>
+    </head>
+    <body>
+
+        <div class="box">
+            <h2>Login</h2>
+            <form>
+                <div class="inputBox">
+                    <label>Username</label>
+    
+                    <input type="text" id="txtUsername" />
+                </div>
+                <div class="inputBox">
+                    <label>Password</label>
+    
+                    <input type="password" id="txtPassword" />
+                </div>
+                <input type="button" value="Sign In" onclick="login()" />
+            </form>
+            <div class="hideBox" id="showmsg">
+                <label>Please Enter Username & Password</label>
+                <img src="Images/Icons/Close.png" width="20"  />
+            </div>
+        </div>
+
+    </body>
+</html>
